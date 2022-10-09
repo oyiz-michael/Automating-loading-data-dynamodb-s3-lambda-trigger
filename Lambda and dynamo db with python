@@ -1,0 +1,46 @@
+#List:
+
+#Creat lamda function 
+#Author from scratch(add name and runtime)
+
+import json
+import boto3
+
+dynamodb = boto3.resource('dynamodb')
+Table = dynamodb.Table('Planets')
+
+def lambda_handler(event, context):
+    response = Table.get_item(
+        key={
+            'id' : 'earth'
+        }
+    )
+    print(response)
+    return {
+        'statuscode': 200,
+        'body' : response
+    }
+
+
+#Put:
+import json
+import boto3
+
+dynamodb = boto3.resources('dynamodb')
+table = dynamodb.table('Planets')
+
+
+def lambda_handler(event, context):
+    table.put_item(
+       item={
+           'id' : 'neptune',
+           'temp' : 'super cold'
+        }
+    )
+    response = {
+        'message': 'item added'
+    }
+    return {
+        'statusCode': 200,
+        'body': 'item added'
+    }

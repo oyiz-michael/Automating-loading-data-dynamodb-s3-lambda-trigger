@@ -1,0 +1,18 @@
+import json
+
+def lambda_handler(event, context):
+    # TODO implement
+    #name = (json.loads(event['body'])).get('name')
+    print(event)
+    name = event['name']
+    if len(name) < 4:
+        return_value = 'name is too short'
+    elif name[2] not in ['a','e','i','o','u']:
+        return_value = name[:3]
+    else:
+        return_value = name[:4]
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps(return_value)
+    }
